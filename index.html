@@ -1,19 +1,47 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    <!-- All of the Node.js APIs are available in this renderer process. -->
-    We are using Node.js <script>document.write(process.versions.node)</script>,
-    Chromium <script>document.write(process.versions.chrome)</script>,
-    and Electron <script>document.write(process.versions.electron)</script>.
 
+<head>
+    <meta charset="UTF-8">
+    <title>Hellogi World!</title>
+    <style>
+        body {
+            background-image: url('./images/wallpaper.jpg');
+            color: white;
+            text-align: center;
+            margin: 25%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tempus Fugit</h1>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    <div id="div_horloge"></div>
     <script>
-      // You can also require other files to run in this process
-      require('./renderer.js')
+        // You can also require other files to run in this process
+        require('./renderer.js')
+
+        window.onload = function () {
+            horloge('div_horloge');
+        };
+
+        function horloge(el) {
+            if (typeof el == "string") {
+                el = document.getElementById(el);
+            }
+
+            function actualiser() {
+                var date = new Date();
+                var str = date.getHours();
+                str += ':' + (date.getMinutes() < 10 ? '0' : '') + date.getMinutes();
+                str += ':' + (date.getSeconds() < 10 ? '0' : '') + date.getSeconds();
+                el.innerHTML = str;
+            }
+            actualiser();
+            setInterval(actualiser, 1000);
+        }
     </script>
-  </body>
+</body>
+
 </html>
